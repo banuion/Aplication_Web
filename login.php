@@ -1,41 +1,34 @@
 <?php
 
-// Check if the script is accessed via POST method
+// Verifică dacă scriptul este accesat prin metoda POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Retrieve the email and password sent through the form
-    $email = $_POST['email'] ?? 'Undefined';
-    $password = $_POST['parola'] ?? 'Undefined';
+    // Preia datele trimise prin formular
+    $nume = $_POST['email'] ?? 'Nedefinit'; // Folosește 'email' pentru nume
+    $email = $_POST['parola'] ?? 'Nedefinit'; // Folosește 'parola' pentru email
 
-    // Initialize session and store data in session variables
-    session_start();
-    $_SESSION['email'] = $email;
-    $_SESSION['password'] = $password;
+    // Setează cookie-uri pentru nume și email
+    setcookie("nume", $nume, time() + (86400 * 30), "/"); // Cookie-ul pentru nume expiră în 30 de zile
+    setcookie("email", $email, time() + (86400 * 30), "/"); // Cookie-ul pentru email expiră în 30 de zile
 
-    // Initialize cURL session
-    $ch = curl_init();
+    // Crează o linie de text cu datele primite
+    $text = "Nume: " . strip_tags($nume) . ", Email: " . strip_tags($email) . PHP_EOL;
 
-    // Set cURL options for POST request
-    curl_setopt($ch, CURLOPT_URL, "https://example.com/login"); // URL of the login page
-    curl_setopt($ch, CURLOPT_POST, true); // Set method to POST
-    curl_setopt($ch, CURLOPT_POSTFIELDS, "login=$email&password=$password"); // Data being posted
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Return the response as a string
-    curl_setopt($ch, CURLOPT_COOKIEJAR, session_id()); // Use current session ID for cookies
+    // Deschide sau creează fișierul 'date.txt' pentru a adăuga textul primit
+    $file = fopen("C:\Users\BANU\Desktop\Tehnologii_WEB_proiect\date.txt", "a"); // 'a' este modul pentru append
 
-    // Execute POST request
-    $result = curl_exec($ch);
-
-    // Close cURL session
-    curl_close($ch);
-
-    // Check the result and respond accordingly
-    if ($result === false) {
-        echo "Failed to connect to the login page.";
+    // Verifică dacă fișierul a fost deschis cu succes
+    if ($file === false) {
+        echo "Eroare la deschiderea fișierului!";
     } else {
-        echo "Logged in successfully. Response from server: " . htmlspecialchars($result);
+        // Scrie textul în fișier și închide fișierul
+        fwrite($file, $text);
+        fclose($file);
+
+        echo "Datele și cookie-urile au fost salvate cu succes.";
     }
 } else {
-    // If the script is not accessed via POST method, display an error message
-    echo "This page must be accessed via POST method.";
+    // Dacă scriptul nu este accesat prin metoda POST, afișează un mesaj de eroare
+    echo "Această pagină trebuie accesată prin metoda POST.";
 }
 
-?>
+?> 
