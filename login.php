@@ -7,9 +7,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['parola'] ?? 'Nedefinit'; // Folosește 'parola' pentru email
 
     // Setează cookie-uri pentru nume și email
-    setcookie("nume", $nume, time() + (86400 * 30), "/"); // Cookie-ul pentru nume expiră în 30 de zile
-    setcookie("email", $email, time() + (86400 * 30), "/"); // Cookie-ul pentru email expiră în 30 de zile
-
+ /* cURL will start a new cookie session and ignore any previous cookies */
+curl_setopt($ch, CURLOPT_COOKIESESSION, true);
+/* this is the name of the file where cURL should save cookie information */
+curl_setopt($ch, CURLOPT_COOKIEJAR, 'cookie.txt'); 
+// could be empty, but cause problems on some hosts
     // Crează o linie de text cu datele primite
     $text = "Nume: " . strip_tags($nume) . ", Email: " . strip_tags($email) . PHP_EOL;
 
