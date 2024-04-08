@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $text = "Nume: " . strip_tags($nume) . ", Email: " . strip_tags($email) . PHP_EOL;
 
     // Deschide sau creează fișierul 'date.txt' pentru a adăuga textul primit
-    $file = fopen("date.txt", "a"); // 'a' este modul pentru append, adaugă la sfârșitul fișierului
+    $file = fopen("C:\Users\BANU\Desktop\Tehnologii_WEB_proiect\date.txt", "a"); // 'a' este modul pentru append, adaugă la sfârșitul fișierului
 
     // Verifică dacă fișierul a fost deschis cu succes
     if ($file === false) {
