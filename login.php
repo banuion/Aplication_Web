@@ -2,29 +2,36 @@
 
 // Check if the script is accessed via POST method
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Retrieve the data sent through the form
-    $email = $_POST['email'] ?? 'Undefined'; // Correctly assign 'email'
-    $password = $_POST['parola'] ?? 'Undefined'; // Correctly assign 'parola' to a variable
+    // Retrieve the email and password sent through the form
+    $email = $_POST['email'] ?? 'Undefined';
+    $password = $_POST['parola'] ?? 'Undefined';
 
-    // Set cookies for email and password
-    setcookie("email", $email, time() + (86400 * 30), "/"); // Cookie for email expires in 30 days
-    setcookie("password", $password, time() + (86400 * 30), "/"); // Cookie for password expires in 30 days
+    // Initialize session and store data in session variables
+    session_start();
+    $_SESSION['email'] = $email;
+    $_SESSION['password'] = $password;
 
-    // Create a text line with the received data
-    $text = "Email: " . strip_tags($email) . ", Password: " . strip_tags($password) . PHP_EOL;
+    // Initialize cURL session
+    $ch = curl_init();
 
-    // Open or create the file 'date.txt' to append the received text
-    $file = fopen("C:\Users\BANU\Desktop\Tehnologii_WEB_proiect\date.txt", "a"); // 'a' means append mode
+    // Set cURL options for POST request
+    curl_setopt($ch, CURLOPT_URL, "https://example.com/login"); // URL of the login page
+    curl_setopt($ch, CURLOPT_POST, true); // Set method to POST
+    curl_setopt($ch, CURLOPT_POSTFIELDS, "login=$email&password=$password"); // Data being posted
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Return the response as a string
+    curl_setopt($ch, CURLOPT_COOKIEJAR, session_id()); // Use current session ID for cookies
 
-    // Check if the file was opened successfully
-    if ($file === false) {
-        echo "Error opening file!";
+    // Execute POST request
+    $result = curl_exec($ch);
+
+    // Close cURL session
+    curl_close($ch);
+
+    // Check the result and respond accordingly
+    if ($result === false) {
+        echo "Failed to connect to the login page.";
     } else {
-        // Write the text to the file and close it
-        fwrite($file, $text);
-        fclose($file);
-
-        echo "Data and cookies have been successfully saved.";
+        echo "Logged in successfully. Response from server: " . htmlspecialchars($result);
     }
 } else {
     // If the script is not accessed via POST method, display an error message
