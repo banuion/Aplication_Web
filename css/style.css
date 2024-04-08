@@ -1,0 +1,952 @@
+/* Import fontul Google */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+/* Variabilele de culoare și stil */
+:root {
+  --green: #2ecc71; /* Green Emerald */
+  --black: #130f40; /* Deep Black */
+  --light-color: #666; /* Light Gray */
+  --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  --border: .2rem solid rgba(0, 0, 0, 0.1);
+}
+
+/* Resetare și stiluri generale */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  text-transform: capitalize;
+  transition: all 0.2s linear;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Stiluri pentru elementele HTML și corp 120.5%; */
+html {
+  font-size: 140%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scroll-padding-top: 7rem;
+}
+
+body {
+  background: #f0f0f0; /* Light Gray */
+}
+
+
+.btn
+{
+  border: 2px solid var(--black);
+margin-top: 1rem;
+display: -inline-block;
+padding: .8rem 3rem;
+font-size: 1.7rem;
+border-radius: .5rem;
+color: black;
+cursor: pointer;
+background: none;
+
+}
+.login-form
+{
+  display: none;
+border:1px solid;
+position: absolute;
+top:10%;
+right:2rem;
+
+box-shadow: var(--box-shadow);
+padding: 2rem;
+border:2rem;
+border: radius 0.5rem;
+background: #fff;
+text-align: center;
+
+
+
+
+}
+
+.header .login-form h3
+{
+font-size: 2.5rem;
+text-transform: uppercase;
+color:var(--black);
+
+}
+
+
+.btn:hover
+{
+background: var(--green);
+color: #fff;
+
+}
+
+
+/* Stiluri pentru antet */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 1rem; /* Ajustat de la 2rem 9% la 2rem 1rem pentru a reduce spațiul din laterale */
+  background-color: #fff; /* White */
+  box-shadow: var(--box-shadow);
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  right: 0;
+  flex-wrap: wrap; 
+}
+
+.logo {
+  color: var(--black);
+  font-size: 5rem;
+
+}
+
+.header .logo i {
+  color: var(--green);
+}
+
+.header .logo a {
+  font-size: 1.7rem;
+  margin: 0 1rem;
+  color: var(--black);
+}
+
+.header .navbar {
+  display: flex;
+  font-size: 1.7rem;
+
+
+}
+
+.header .navbar a {
+  margin-left: 2rem;
+  color: var(--black);
+  font-weight: 500;
+}
+
+.header .navbar a:hover {
+  color: var(--green);
+  
+}
+
+/* Stiluri pentru meniu icon */
+.header .icons div {
+  border: 1px solid;
+  height: 5rem; /* Ajustează înălțimea pentru a face iconițele mai mari */
+  width: 5rem; /* Ajustează lățimea pentru a face iconițele mai mari */
+  line-height: 5rem; /* Ajustează linia pentru a centra iconițele vertical */
+  border-radius: 0.5rem;
+  background: #eee;
+  color: var(--black);
+  font-size: 2.5rem; /* Mărește dimensiunea iconițelor */
+  margin-right: 0.3rem;
+  text-align: center;
+  cursor: pointer;
+ 
+}
+
+
+.header .icons div:hover {
+  background: var(--green);
+  color: white;
+}
+#menu-btn
+{
+
+  display: none;
+}
+.header .navbar.active{
+right:2rem ;
+transition:.4s linear;
+
+}
+/* Stiluri pentru căutare */
+/* Stiluri pentru căutare */
+.header .search-form {
+  border: 0px solid;
+  position: absolute;
+  top: 10%;
+  right: 2rem;
+  max-width: 30rem; /* Reducem lățimea maximă pentru a face căutarea mai mare */
+  height: 5rem; /* Mărim înălțimea pentru a face căutarea mai mare */
+  background: #fff;
+  border-radius: .5rem;
+  overflow: hidden;
+  display: none;
+  align-items: center;
+  box-shadow: var(--box-shadow);
+}
+
+.active {
+  right: 2rem;
+  transition: .4s linear;
+  display: flex !important;
+}
+
+.header .search-form input {
+  height: 100%;
+  width: calc(100% - 5rem); /* Ajustăm lățimea pentru a se potrivi cu iconițele */
+  background: none;
+  text-transform: none;
+  font-size: 2rem; /* Mărim dimensiunea fontului pentru a face textul căutării mai mare */
+  color: var(--black);
+  padding: 0 1.5rem;
+}
+
+.header .search-form label {
+  font-size: 2.5rem; /* Mărim dimensiunea fontului pentru a face iconița mai mare */
+  padding-right: 1.5rem;
+  color: var(--black);
+  cursor: pointer;
+}
+
+.header .search-form label:hover {
+  color: var(--green);
+}
+
+
+.header .shopping-cart
+{
+  display: none;
+  transition: opacity .4s linear, right .4s linear;
+  border: 0px solid;
+position: absolute;
+top:15%;
+right: 4rem;
+padding: 4rem;
+border-radius:.5rem;
+box-shadow: var(--box-shadow);
+width: 30rem;
+background:#fff;
+box-shadow: 1px 1px 1px 1px solid var(--green);
+}
+.header .shopping-cart.active {
+  display: flex !important; /* Asigurați-vă că elementul este vizibil */
+  opacity: 1; /* Opțional, dacă doriți tranziție de opacitate */
+  flex-direction: column; /* Organizează conținutul pe verticală */
+  right: 2rem;
+  transition: opacity .4s linear, right .4s linear; /* Ajustați conform nevoii */
+}
+
+
+
+.header .shopping-cart .box
+{
+
+border:0px solid blue;
+display:flex;
+align-items:center;
+gap:1rem;
+position:relative;
+margin:1rem 0;
+box-shadow: 1px 1px 1px 1px solid var(--green);
+
+
+
+}
+
+
+
+.header .shopping-cart .box img
+{
+
+height: 10rem;
+
+
+}
+
+
+.header .shopping-cart .box .fa-trash
+{
+
+font-size:2rem;
+position: absolute;
+top:80%;
+right: 2rem;
+cursor: pointer;
+color: var(--light-color);
+transform: translate(-50%);
+}
+
+.header .shopping-cart .box .fa-trash:hover
+{
+
+color:var(--green);
+
+}
+
+
+.header .shopping-cart .box .content 
+{
+
+color: var(--black);
+font-size:1.7rem;
+
+}
+
+
+.header .shopping-cart .box .content  .quantity
+{
+  padding-left: 1rem;
+
+}
+
+.header .shopping-cart .total
+{
+  font-size: 2.5rem;
+  padding: 1rem 0;
+  text-align: center;
+  color: var(--black);
+
+}
+
+
+.header .shopping-cart .btn
+{
+
+display: block;
+text-align: center;
+margin: 1rem 0;
+
+
+}
+
+.header .login-form .box
+{
+  width: 100%;
+border: 1px solid;
+margin: .7rem 0;
+background: #eee;
+border-radius: .5rem;
+padding: 1rem;
+font-size:1.6rem;
+color:var(--black);
+text-transform: none;
+
+
+}
+
+.header .login-form p
+{
+ font-size:1.4rem;
+padding:.5rem 0;
+color: var(--light-color);
+
+
+}
+
+.header .login-form p a
+{
+ 
+color: var(--green);
+text-decoration: underline;
+
+}
+
+.header .login-form.active
+{
+ 
+right:2rem;
+transition: .4s linear;
+flex-direction: column;
+}
+
+
+
+@media (max-width: 768px)
+{
+
+.header .navbar
+{
+  position: absolute;
+  top:110%;
+  right: 2rem;
+  width: 30rem;
+  box-shadow: var(--box-shadow);
+  border-radius: .5rem;
+  background: #fff;
+
+}
+
+
+}
+
+
+
+
+@media (max-width: 450px)
+{
+
+html{
+    font-size: 55%;
+}
+
+.header{
+    padding:2rem;
+}
+
+
+}
+
+
+
+
+
+
+.header .navbar.active
+{
+
+right: 2rem;
+transition: .4s linear;
+
+}
+
+.home {
+  background-color: #f0f0f0; /* fundal deschis pentru contrast */
+  padding: 50px 0; /* spațiu în jurul conținutului */
+  text-align: center; /* aliniază textul la centru */
+}
+
+/* Stiluri pentru conținutul din secțiune */
+.home .content {
+  max-width: 600px; /* limitează lățimea conținutului */
+  margin: 0 auto; /* centrează conținutul orizontal */
+  padding: 20px; /* spațiu în interiorul conținutului */
+  background-color: white; /* fundal alb pentru conținut */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* adaugă o umbră ușoară */
+  border-radius: 8px; /* colțuri rotunjite */
+}
+
+/* Stiluri pentru titlul secțiunii */
+.home h3 {
+  color: #333; /* culoare text */
+  font-size: 24px; /* mărimea fontului */
+  margin-bottom: 20px; /* spațiu sub titlu */
+}
+
+.home h3 span {
+  color: #68a225; /* culoare pentru "Organic" */
+}
+
+/* Stiluri pentru buton */
+
+/* Adaugă aceste stiluri în CSS-ul tău */
+
+.home
+{
+
+border:1px solid;
+display:flex;
+justify-content: center;
+background: url(../imagine/download.jpg);
+
+
+}
+
+.heading span{
+
+background: var(--green);
+color: #fff;
+display:inline-block;
+padding: .5rem 3rem;
+clip-path: polygon(100% 0,93% 50%,100% 99%,0% 100%,7% 50%,0% 0%);
+}
+
+
+.heading{
+text-align: center;
+padding: 2rem 0;
+padding-bottom: 3rem;
+font-size: 3.5rem;
+color: var(--black);
+}
+
+
+
+/* Stiluri pentru secțiunea de caracteristici */
+/* General styles to reset margins and paddings */
+
+.features .box-container{
+border:0px solid;
+display:grid;
+grid-template-columns: repeat(auto-fit,minmax(30rem,1fr));
+gap:1.5rem;
+transition: .2s linear;
+}
+
+
+.features .box-container .box{
+
+border:0px solid red;
+padding:3rem 2rem;
+outline-offset: -1rem;
+text-align:center;
+box-shadow:var(--box-shadow);
+transition: .2s linear;
+}
+
+.features .box-container .box:hover{
+
+box-shadow: 1px 1px 1px 1px solid var(--green);
+
+}
+
+
+.features .box-container .box img
+{
+margin:1rem 0;
+height: 15rem;
+
+
+}
+
+.features .box-container .box h3
+{
+font-size: 2.5rem;
+line-height: 1.8;
+color:var(--black);
+
+}
+
+
+.features .box-container .box p
+{
+font-size: 2.5rem;
+line-height: 1.8;
+color:var(--light-color);
+
+}
+
+/* product*/
+
+.Products .product-slider{
+
+border:0px solid;
+padding: 1rem;
+}
+
+.Products .product-slider:first-child{
+
+ margin-bottom: 2rem;
+
+  }
+  
+  .Products .product-slider .box{
+
+    border:0px solid red;
+   background: #fff;
+   border-radius: .5rem;
+   text-align: center;
+   padding: 3rem 2rem;
+   outline-offset:-1rem;
+   outline: var(--outline);
+   box-shadow: var(--box-shadow);
+transition: .2s linear;
+
+  }
+    
+
+    .Products .product-slider .box:hover{
+
+      box-shadow: 1px 1px 10px 4px var(--green);
+ 
+      }
+      .Products .product-slider .box img{    
+      
+      height: 20rem;
+      
+      }
+
+      .Products .product-slider .box h1{    
+      
+       font-size: 2.5;
+       color:var(--black);
+        
+        }
+
+        .Products .product-slider .box .price{
+
+font-size:2 rem;
+color:var(--light-color);
+padding: .5rem 0;
+
+        }
+
+
+        .Products .product-slider .box .stars i{
+
+        
+font-size: 1.7rem;
+color:orange;
+padding: .5rem 0;          
+                  }
+          
+
+.Categories .box-container
+{
+border:0px solid;
+display:grid;
+grid-template-columns: repeat(auto-fit,minmax(30rem,1fr));
+gap:1.5rem;
+
+}
+
+.Categories .box-container .box{
+padding: 3rem 0;
+background: #fff;
+border-radius:.5rem;
+box-shadow: var(--box-shadow);
+outline-offset: -1rem;
+outline:var(--outline);
+text-align: center;
+
+
+
+
+}
+
+.Categories .box-container .box:hover
+{
+  box-shadow: 1px 1px 10px 4px var(--green);
+
+
+
+}
+
+
+.Categories .box-container .box img
+{
+
+  margin: 1rem 0;
+  height:15rem;
+
+}
+.Categories .box-container .box h3
+{
+font-size: 2rem;
+color:var(--black);
+line-height:1.8 ;
+
+}
+
+
+.Categories .box-container .box p
+{
+font-size: 1.7rem;
+color:var(--light-color);
+line-height:1.8 ;
+padding: 1rem 0;
+
+}
+
+
+
+/*  reviw*/
+
+.Review  .review-slider
+{
+border:1px solid;
+padding: 1rem;
+
+
+
+}
+.Review  .review-slider .box
+{
+
+  border:0px solid red;
+  background: #fff;
+  border-radius: .5rem;
+  text-align: center;
+  padding: 3rem 2rem;
+  outline-offset:-1rem;
+  outline: var(--outline);
+  box-shadow: var(--box-shadow);
+transition: .2s linear;
+
+
+}
+
+.Review  .review-slider .box:hover
+{
+
+  box-shadow: 1px 1px 10px 4px var(--green);
+
+
+}
+
+
+.Review  .review-slider .box img
+{
+
+ height: 10rem;
+ width: 10rem;
+ border-radius: 50%;
+
+
+
+}
+
+.Review  .review-slider .box p{
+
+padding: 1rem 0;
+line-height: 1.8;
+color:var(--light-color);
+font-size:1.5rem;
+
+
+
+}
+
+.Review  .review-slider .box h3{
+
+  padding-bottom: .5rem;
+  line-height: 1.8;
+  color:var(--black);
+  font-size:2.2rem;
+  
+  
+  }
+
+  .Review  .review-slider .box .stars i
+{
+
+color: orange;
+
+
+
+}
+
+/*blogs*/
+
+.Blocs .box-container{
+
+border:0px solid;
+display:grid;
+grid-template-columns: repeat(auto-fit,minmax(26rem,1fr));
+gap:1.5rem;
+
+}
+
+
+.Blocs .box-container .box{
+
+  overflow: hidden;
+  border-radius: .5rem;
+  box-shadow: var(--box-shadow);
+  background: #fff;
+  
+  
+  }
+  .Blocs .box-container .box img{ 
+
+height:25rem;
+width: 100%;
+object-fit: cover;
+
+
+  }
+
+
+  .Blocs .box-container .box .content{ 
+
+
+padding:2rem;
+border:1px solid;
+
+
+  }
+
+
+  .Blocs .box-container .box .content .icons{ 
+  
+  
+    border:1px solid blue;
+    display: flex;
+    align-items: center;
+    
+    padding-bottom: 1.5rem;
+    margin-bottom: 1rem;
+border-bottom: var(--border);
+
+  
+  }
+
+
+  
+  .Blocs .box-container .box .content .icons a{ 
+  
+  
+  color:var(--light-color);
+  font-size: 2rem;
+
+    
+  
+  }
+
+  .Blocs .box-container .box .content .icons a i{ 
+  
+  
+    color:green;
+ padding-right: .5rem;
+  
+      
+    
+    }
+
+     
+  .Blocs .box-container .box .content .icons a:hover{ 
+  
+  color:var(--black);
+
+  
+  }
+
+  .Blocs .box-container .box .content h3{ 
+  
+    line-height: 1.8;
+  color:var(--black);
+    font-size :2.2em;
+    padding: .5rem 0;
+    }
+  
+    .Blocs .box-container .box .content p{ 
+  
+      line-height: 1.8;
+    color:var(--light-color);
+
+      font-size: 1.5rem;
+      padding: .5rem 0;
+      }
+      
+     
+        /*footer*/
+.footer
+{
+background: #fff;
+
+}
+.footer .box-container{
+  border:0px solid;
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(26rem,1fr));
+  gap:1.5rem;
+  
+}
+.footer .box-container .box h3
+{
+
+  font-size:2.5rem;
+  color:var(--black);
+  padding: 1rem 0;
+
+}
+
+.footer .box-container .box h3 i
+{
+color:green;
+
+}
+
+.footer .box-container .box a{
+  display:block;
+  font-size:2.5rem;
+  color:var(--light-color);
+  padding: 1rem 0;
+
+}
+.footer .box-container .box a:hover i
+{
+
+padding-right: 2rem;
+
+}
+.footer .box-container .box a i
+{
+color:var(--green);
+padding-right: .5rem;
+
+}
+.footer .box-container .box p{
+ line-height: 1.8;
+  font-size:1.5rem;
+  color:var(--light-color);
+  padding: 1rem 0;
+
+}
+
+.footer .box-container .box .share a
+{
+
+border:1px solid;
+height: 4rem;
+width: 4rem;
+line-height: 4rem;
+border-radius: .5rem;
+font-size:2rem;
+color:var(--black);
+margin-left:.2rem;
+background: #eee;
+
+
+}
+
+.footer .box-container .box .share a:hover{
+
+background: var(--green);
+color:#fff;
+}
+.footer .box-container .box .links{
+  display: block;
+   font-size:1.5rem;
+   color:var(--light-color);
+   padding: 1rem 0;
+ 
+ }
+ .footer .box-container .box .links i{
+  
+   color:var(--green);
+   padding-right: .5rem;
+ 
+ }
+ 
+ .footer .box-container .box .email{
+margin:.7rem 0;
+padding: 1rem;
+border-radius:.5rem ;
+background: #eee;
+font-size:1.6rem;
+color:var(--black);
+text-transform: none;
+
+}
+
+
+.footer .box-container .box .payment-img
+{
+
+margin-top:2rem;
+height:15rem;
+
+}
+
+.footer .credit{
+
+  text-align: center;
+  margin-top: 2rem;
+  padding:1rem;
+  padding-top:2.5rem ;
+  font-size: 2rem;
+  color:var(--black);
+  border-top:var(--border);
+}
+
+.footer .credit span{
+  color:var(--green) ;
+}
