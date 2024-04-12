@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         fwrite($file, $text);
         fclose($file);
 
-        echo "Datele au fost salvate cu succes.";
+        echo "Datele au fost salvate cu succe OK OKs.";
     }
 } else {
     // Dacă scriptul nu este accesat prin metoda POST, afișează un mesaj de eroare
